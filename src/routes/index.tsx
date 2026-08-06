@@ -89,7 +89,7 @@ function MonitorConsole() {
             ))}
 
             {/* Master */}
-            <article className="glass-panel sticky right-0 flex w-[132px] shrink-0 flex-col items-center gap-3 rounded-2xl border-master/30 bg-master/5 px-3 py-4">
+            <article className="sticky right-0 flex w-[132px] shrink-0 flex-col items-center gap-3 rounded-2xl border border-master/30 bg-surface px-3 py-4 shadow-[-12px_0_24px_-12px_rgba(0,0,0,0.9)]">
               <header className="flex flex-col items-center gap-1">
                 <span className="rounded-full bg-master/15 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-master">
                   master
