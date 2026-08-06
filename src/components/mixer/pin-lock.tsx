@@ -19,7 +19,13 @@ interface PinLockProps {
 const KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "clear", "0", "del"];
 const PIN_LENGTH = 4;
 
-export function PinLock({ bus, onSubmit, onCancel }: PinLockProps) {
+export function PinLock({
+  bus,
+  buses,
+  onSelectBus,
+  onSubmit,
+  onCancel,
+}: PinLockProps) {
   const [pin, setPin] = useState("");
   const [error, setError] = useState(false);
   const [checking, setChecking] = useState(false);
