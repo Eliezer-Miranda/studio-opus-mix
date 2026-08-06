@@ -3,6 +3,7 @@ import { Activity, RotateCcw, Sliders } from "lucide-react";
 import { BusSidebar } from "@/components/mixer/bus-sidebar";
 import { ChannelStrip } from "@/components/mixer/channel-strip";
 import { VerticalFader } from "@/components/mixer/vertical-fader";
+import { PinLock } from "@/components/mixer/pin-lock";
 import { useMixerState } from "@/hooks/use-mixer-state";
 import { formatDb } from "@/lib/mixer-types";
 
