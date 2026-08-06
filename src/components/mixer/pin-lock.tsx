@@ -68,6 +68,31 @@ export function PinLock({
           </p>
         </div>
 
+        {buses && onSelectBus && (
+          <div className="mt-5 flex flex-wrap justify-center gap-1.5">
+            {buses.map((b) => (
+              <button
+                key={b.id}
+                type="button"
+                onClick={() => {
+                  setPin("");
+                  setError(false);
+                  onSelectBus(b.id);
+                }}
+                aria-pressed={b.id === bus.id}
+                className={cn(
+                  "rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-widest transition-colors",
+                  b.id === bus.id
+                    ? "border-level/50 bg-level/15 text-level"
+                    : "border-border bg-surface/60 text-muted-foreground hover:bg-surface-raised",
+                )}
+              >
+                {b.name}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="my-6 flex justify-center gap-3">
           {Array.from({ length: PIN_LENGTH }).map((_, i) => {
             const filled = i < pin.length;
