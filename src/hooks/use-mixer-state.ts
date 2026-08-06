@@ -96,7 +96,10 @@ export function useMixerState() {
   return {
     buses: BUSES,
     activeBusId,
-    setActiveBusId,
+    setActiveBusId: selectBus,
+    unlockedBusId,
+    authenticate,
+    lock,
     channels,
     patchChannel,
     soloActive,
