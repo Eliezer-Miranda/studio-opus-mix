@@ -5,6 +5,9 @@ import type { MixerBus } from "@/lib/mixer-types";
 
 interface PinLockProps {
   bus: MixerBus;
+  /** All mixes, rendered as a picker so the musician selects who they are. */
+  buses?: MixerBus[];
+  onSelectBus?: (id: string) => void;
   /**
    * Validates the typed PIN. Mocked locally today — replace with
    * `socket.emit("session:auth", { busId, pin }, cb)` (server-side check).
