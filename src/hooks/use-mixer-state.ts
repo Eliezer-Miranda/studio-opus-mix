@@ -31,10 +31,43 @@ const BASE_CHANNELS: MixerChannel[] = [
   { id: "trkpads", name: "Pads Trk", kind: "backing", volume: 47, pan: 0, mute: false, solo: false, level: 26 },
 ];
 
+/**
+ * Mock PINs. In production the PIN is NEVER validated in the browser:
+ * emit `session:auth { busId, pin }` and keep the returned session token.
+ * See docs/monitor-console-endpoints.md.
+ */
+const MOCK_PINS: Record<string, string> = {
+  bateria: "1111",
+  baixo: "2222",
+  teclado: "3333",
+  vozes: "4444",
+  pastor: "5555",
+  playback: "6666",
+};
+
 export function useMixerState() {
   const [activeBusId, setActiveBusId] = useState<string>("bateria");
+  const [unlockedBusId, setUnlockedBusId] = useState<string | null>(null);
   const [master, setMaster] = useState(82);
   const [channels, setChannels] = useState<MixerChannel[]>(BASE_CHANNELS);
+
+  /** Replace with the socket round-trip; keep the boolean contract. */
+  const authenticate = useCallback(
+    (busId: string, pin: string): boolean => {
+      const ok = MOCK_PINS[busId] === pin;
+      if (ok) setUnlockedBusId(busId);
+      return ok;
+    },
+    [],
+  );
+
+  const lock = useCallback(() => setUnlockedBusId(null), []);
+
+  const selectBus = useCallback((id: string) => {
+    setActiveBusId(id);
+    // Trocar de músico exige novo PIN.
+    setUnlockedBusId((prev) => (prev === id ? prev : null));
+  }, []);
 
   const patchChannel = useCallback((id: string, patch: ChannelPatch) => {
     setChannels((prev) =>
