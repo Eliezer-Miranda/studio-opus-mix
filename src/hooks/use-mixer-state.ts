@@ -32,7 +32,7 @@ const BASE_CHANNELS: MixerChannel[] = [
 ];
 
 export function useMixerState() {
-  const [activeBusId, setActiveBusId] = useState(BUSES[0].id);
+  const [activeBusId, setActiveBusId] = useState<string>("bateria");
   const [master, setMaster] = useState(82);
   const [channels, setChannels] = useState<MixerChannel[]>(BASE_CHANNELS);
 
