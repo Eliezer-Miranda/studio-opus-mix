@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Activity, RotateCcw, Sliders } from "lucide-react";
+import { Activity, Lock, RotateCcw, Sliders } from "lucide-react";
 import { BusSidebar } from "@/components/mixer/bus-sidebar";
 import { ChannelStrip } from "@/components/mixer/channel-strip";
 import { VerticalFader } from "@/components/mixer/vertical-fader";
+import { PinLock } from "@/components/mixer/pin-lock";
 import { useMixerState } from "@/hooks/use-mixer-state";
 import { formatDb } from "@/lib/mixer-types";
 
@@ -33,6 +34,9 @@ function MonitorConsole() {
     buses,
     activeBusId,
     setActiveBusId,
+    unlockedBusId,
+    authenticate,
+    lock,
     channels,
     patchChannel,
     soloActive,
@@ -41,6 +45,17 @@ function MonitorConsole() {
   } = useMixerState();
 
   const activeBus = buses.find((b) => b.id === activeBusId)!;
+
+  if (unlockedBusId !== activeBusId) {
+    return (
+      <PinLock
+        bus={activeBus}
+        buses={buses}
+        onSelectBus={setActiveBusId}
+        onSubmit={(pin) => authenticate(activeBusId, pin)}
+      />
+    );
+  }
 
   return (
     <div className="console-grid-bg min-h-screen bg-background">
@@ -72,6 +87,13 @@ function MonitorConsole() {
               <span className="flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 <Sliders className="h-3 w-3" /> {channels.length} ch
               </span>
+              <button
+                type="button"
+                onClick={lock}
+                className="flex items-center gap-2 rounded-full border border-mute/40 bg-mute/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-mute transition-colors hover:bg-mute/20"
+              >
+                <Lock className="h-3 w-3" /> bloquear
+              </button>
             </div>
           </header>
 
