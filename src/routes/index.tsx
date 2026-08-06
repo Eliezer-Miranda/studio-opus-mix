@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Activity, RotateCcw, Sliders } from "lucide-react";
+import { Activity, Lock, RotateCcw, Sliders } from "lucide-react";
 import { BusSidebar } from "@/components/mixer/bus-sidebar";
 import { ChannelStrip } from "@/components/mixer/channel-strip";
 import { VerticalFader } from "@/components/mixer/vertical-fader";
