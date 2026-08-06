@@ -77,7 +77,7 @@ function MonitorConsole() {
 
           <section
             aria-label="Canais do mixer"
-            className="flex flex-1 gap-3 overflow-x-auto pb-2"
+            className="flex flex-1 items-start gap-3 overflow-x-auto pb-2"
           >
             {channels.map((channel) => (
               <ChannelStrip
