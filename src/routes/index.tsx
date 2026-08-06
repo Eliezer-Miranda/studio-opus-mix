@@ -33,6 +33,9 @@ function MonitorConsole() {
     buses,
     activeBusId,
     setActiveBusId,
+    unlockedBusId,
+    authenticate,
+    lock,
     channels,
     patchChannel,
     soloActive,
@@ -41,6 +44,17 @@ function MonitorConsole() {
   } = useMixerState();
 
   const activeBus = buses.find((b) => b.id === activeBusId)!;
+
+  if (unlockedBusId !== activeBusId) {
+    return (
+      <PinLock
+        bus={activeBus}
+        buses={buses}
+        onSelectBus={setActiveBusId}
+        onSubmit={(pin) => authenticate(activeBusId, pin)}
+      />
+    );
+  }
 
   return (
     <div className="console-grid-bg min-h-screen bg-background">
