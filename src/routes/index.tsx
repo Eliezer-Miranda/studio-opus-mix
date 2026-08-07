@@ -87,24 +87,28 @@ function MonitorConsole() {
               <span className="hidden items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-level sm:flex">
                 <Activity className="h-3 w-3" /> 48 kHz · 32 bit
               </span>
-              <span className="flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              <span className="hidden items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:flex">
                 <Sliders className="h-3 w-3" /> {channels.length} ch
               </span>
               <button
                 type="button"
                 onClick={() => setCompact((v) => !v)}
                 aria-pressed={compact}
-                className="flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors hover:bg-surface-raised data-[active=true]:border-pan/60 data-[active=true]:text-pan"
+                title={compact ? "Modo normal" : "Modo compacto"}
+                className="flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors hover:bg-surface-raised data-[active=true]:border-pan/60 data-[active=true]:text-pan sm:px-3 sm:py-1.5"
                 data-active={compact}
               >
-                <Columns className="h-3 w-3" /> compacto
+                <Columns className="h-4 w-4 sm:h-3 sm:w-3" />
+                <span className="hidden sm:inline">compacto</span>
               </button>
               <button
                 type="button"
                 onClick={lock}
+                title="Bloquear console"
                 className="flex items-center gap-2 rounded-full border border-mute/40 bg-mute/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-mute transition-colors hover:bg-mute/20"
               >
-                <Lock className="h-3 w-3" /> bloquear
+                <Lock className="h-4 w-4 sm:h-3 sm:w-3" />
+                <span className="hidden sm:inline">bloquear</span>
               </button>
             </div>
           </header>
