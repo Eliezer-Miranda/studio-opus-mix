@@ -121,6 +121,8 @@ export function useMixerState() {
     unlockedBusId,
     authenticate,
     lock,
+    compact,
+    setCompact,
     channels,
     patchChannel,
     soloActive,
