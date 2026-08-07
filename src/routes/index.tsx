@@ -118,6 +118,7 @@ function MonitorConsole() {
                 channel={channel}
                 onChange={patchChannel}
                 soloActive={soloActive}
+                compact={compact}
               />
             ))}
 
