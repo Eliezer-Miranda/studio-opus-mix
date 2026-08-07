@@ -49,7 +49,7 @@ export function ChannelStrip({ channel, onChange, soloActive }: ChannelStripProp
   return (
     <article
       className={cn(
-        "glass-panel flex w-[132px] shrink-0 flex-col items-center gap-3 rounded-2xl px-3 py-4 transition-all duration-200",
+        "glass-panel flex w-[112px] shrink-0 flex-col items-center gap-2 rounded-2xl px-2 py-3 transition-all duration-200 sm:w-[124px] sm:gap-3 sm:px-3 sm:py-4 lg:w-[132px]",
         dimmed && "opacity-60",
         channel.solo && "ring-1 ring-solo/50",
       )}

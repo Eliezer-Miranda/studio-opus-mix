@@ -111,7 +111,7 @@ function MonitorConsole() {
             ))}
 
             {/* Master */}
-            <article className="sticky right-0 flex w-[132px] shrink-0 flex-col items-center gap-3 rounded-2xl border border-master/30 bg-surface px-3 py-4 shadow-[-12px_0_24px_-12px_rgba(0,0,0,0.9)]">
+            <article className="sticky right-0 flex w-[112px] shrink-0 flex-col items-center gap-2 rounded-2xl border border-master/30 bg-surface px-2 py-3 shadow-[-12px_0_24px_-12px_rgba(0,0,0,0.9)] sm:w-[124px] sm:gap-3 sm:px-3 sm:py-4 lg:w-[132px]">
               <header className="flex flex-col items-center gap-1">
                 <span className="rounded-full bg-master/15 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-master">
                   master
