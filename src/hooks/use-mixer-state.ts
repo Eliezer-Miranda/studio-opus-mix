@@ -68,6 +68,7 @@ const MOCK_PINS: Record<string, string> = {
 export function useMixerState() {
   const [activeBusId, setActiveBusId] = useState<string>("bateria");
   const [unlockedBusId, setUnlockedBusId] = useState<string | null>(null);
+  const [compact, setCompact] = useState(false);
   const [master, setMaster] = useState(82);
   const [channels, setChannels] = useState<MixerChannel[]>(BASE_CHANNELS);
 
