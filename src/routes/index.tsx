@@ -91,6 +91,15 @@ function MonitorConsole() {
               </span>
               <button
                 type="button"
+                onClick={() => setCompact((v) => !v)}
+                aria-pressed={compact}
+                className="flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors hover:bg-surface-raised data-[active=true]:border-pan/60 data-[active=true]:text-pan"
+                data-active={compact}
+              >
+                <Columns className="h-3 w-3" /> compacto
+              </button>
+              <button
+                type="button"
                 onClick={lock}
                 className="flex items-center gap-2 rounded-full border border-mute/40 bg-mute/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-mute transition-colors hover:bg-mute/20"
               >
