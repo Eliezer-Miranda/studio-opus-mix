@@ -6,6 +6,7 @@ import { VerticalFader } from "@/components/mixer/vertical-fader";
 import { PinLock } from "@/components/mixer/pin-lock";
 import { useMixerState } from "@/hooks/use-mixer-state";
 import { formatDb } from "@/lib/mixer-types";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
