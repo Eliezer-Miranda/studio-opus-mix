@@ -9,6 +9,7 @@ interface ChannelStripProps {
   /** Emit partial updates — wire this to socket.emit("channel:update", ...). */
   onChange: (id: string, patch: ChannelPatch) => void;
   soloActive?: boolean;
+  compact?: boolean;
 }
 
 function Led({ on, color }: { on: boolean; color: string }) {
