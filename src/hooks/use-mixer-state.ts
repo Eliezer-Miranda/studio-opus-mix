@@ -52,10 +52,17 @@ const BASE_CHANNELS: MixerChannel[] = [
 const MOCK_PINS: Record<string, string> = {
   bateria: "1111",
   baixo: "2222",
-  teclado: "3333",
-  vozes: "4444",
-  pastor: "5555",
-  playback: "6666",
+  guitarra: "3333",
+  violao: "4444",
+  teclado: "5555",
+  teclado2: "6666",
+  voz1: "7777",
+  voz2: "8888",
+  voz3: "9999",
+  voz4: "0000",
+  ministro: "1212",
+  pastor: "1313",
+  playback: "1414",
 };
 
 export function useMixerState() {
