@@ -37,6 +37,8 @@ function MonitorConsole() {
     unlockedBusId,
     authenticate,
     lock,
+    compact,
+    setCompact,
     channels,
     patchChannel,
     soloActive,
