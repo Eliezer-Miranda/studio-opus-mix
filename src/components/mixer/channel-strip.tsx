@@ -43,14 +43,17 @@ function Meter({ level, dimmed }: { level: number; dimmed: boolean }) {
   );
 }
 
-export function ChannelStrip({ channel, onChange, soloActive }: ChannelStripProps) {
+export function ChannelStrip({ channel, onChange, soloActive, compact }: ChannelStripProps) {
   const dimmed = channel.mute || (soloActive === true && !channel.solo);
   const isLive = channel.kind === "live";
 
   return (
     <article
       className={cn(
-        "glass-panel flex w-[112px] shrink-0 flex-col items-center gap-2 rounded-2xl px-2 py-3 transition-all duration-200 sm:w-[124px] sm:gap-3 sm:px-3 sm:py-4 lg:w-[132px]",
+        "glass-panel flex shrink-0 flex-col items-center gap-2 rounded-2xl px-2 py-3 transition-all duration-200",
+        compact
+          ? "w-[88px] gap-1.5 px-1.5 py-2 sm:w-[92px] sm:px-2 sm:py-2.5 lg:w-[96px]"
+          : "w-[112px] gap-2 sm:w-[124px] sm:gap-3 sm:px-3 sm:py-4 lg:w-[132px]",
         dimmed && "opacity-60",
         channel.solo && "ring-1 ring-solo/50",
       )}
