@@ -9,6 +9,7 @@ interface ChannelStripProps {
   /** Emit partial updates — wire this to socket.emit("channel:update", ...). */
   onChange: (id: string, patch: ChannelPatch) => void;
   soloActive?: boolean;
+  compact?: boolean;
 }
 
 function Led({ on, color }: { on: boolean; color: string }) {
@@ -42,14 +43,17 @@ function Meter({ level, dimmed }: { level: number; dimmed: boolean }) {
   );
 }
 
-export function ChannelStrip({ channel, onChange, soloActive }: ChannelStripProps) {
+export function ChannelStrip({ channel, onChange, soloActive, compact }: ChannelStripProps) {
   const dimmed = channel.mute || (soloActive === true && !channel.solo);
   const isLive = channel.kind === "live";
 
   return (
     <article
       className={cn(
-        "glass-panel flex w-[112px] shrink-0 flex-col items-center gap-2 rounded-2xl px-2 py-3 transition-all duration-200 sm:w-[124px] sm:gap-3 sm:px-3 sm:py-4 lg:w-[132px]",
+        "glass-panel flex shrink-0 flex-col items-center gap-2 rounded-2xl px-2 py-3 transition-all duration-200",
+        compact
+          ? "w-[88px] gap-1.5 px-1.5 py-2 sm:w-[92px] sm:px-2 sm:py-2.5 lg:w-[96px]"
+          : "w-[112px] gap-2 sm:w-[124px] sm:gap-3 sm:px-3 sm:py-4 lg:w-[132px]",
         dimmed && "opacity-60",
         channel.solo && "ring-1 ring-solo/50",
       )}
@@ -101,34 +105,40 @@ export function ChannelStrip({ channel, onChange, soloActive }: ChannelStripProp
         <span className="ml-0.5 font-mono text-[9px] text-muted-foreground">dB</span>
       </div>
 
-      <div className="grid w-full grid-cols-2 gap-2">
+      <div className={cn("grid w-full gap-2", compact ? "grid-cols-1" : "grid-cols-2")}>
         <button
           type="button"
           aria-pressed={channel.mute}
           onClick={() => onChange(channel.id, { mute: !channel.mute })}
           className={cn(
-            "flex items-center justify-center gap-1 rounded-lg border py-1.5 font-mono text-[10px] uppercase tracking-widest transition-colors",
+            "flex items-center justify-center gap-1.5 rounded-lg border font-mono uppercase tracking-widest transition-colors active:scale-95",
+            compact
+              ? "min-h-[44px] text-[11px] sm:min-h-[48px] sm:text-xs"
+              : "py-1.5 text-[10px]",
             channel.mute
               ? "border-mute/60 bg-mute/20 text-mute"
               : "border-border bg-surface/60 text-muted-foreground hover:bg-surface-raised",
           )}
         >
           <Led on={channel.mute} color="var(--mute)" />
-          <VolumeX className="h-3 w-3" />
+          <VolumeX className={compact ? "h-4 w-4" : "h-3 w-3"} />
         </button>
         <button
           type="button"
           aria-pressed={channel.solo}
           onClick={() => onChange(channel.id, { solo: !channel.solo })}
           className={cn(
-            "flex items-center justify-center gap-1 rounded-lg border py-1.5 font-mono text-[10px] uppercase tracking-widest transition-colors",
+            "flex items-center justify-center gap-1.5 rounded-lg border font-mono uppercase tracking-widest transition-colors active:scale-95",
+            compact
+              ? "min-h-[44px] text-[11px] sm:min-h-[48px] sm:text-xs"
+              : "py-1.5 text-[10px]",
             channel.solo
               ? "border-solo/60 bg-solo/20 text-solo"
               : "border-border bg-surface/60 text-muted-foreground hover:bg-surface-raised",
           )}
         >
           <Led on={channel.solo} color="var(--solo)" />
-          <Headphones className="h-3 w-3" />
+          <Headphones className={compact ? "h-4 w-4" : "h-3 w-3"} />
         </button>
       </div>
     </article>

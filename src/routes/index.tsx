@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Activity, Lock, RotateCcw, Sliders } from "lucide-react";
+import { Activity, Columns, Lock, RotateCcw, Sliders } from "lucide-react";
 import { BusSidebar } from "@/components/mixer/bus-sidebar";
 import { ChannelStrip } from "@/components/mixer/channel-strip";
 import { VerticalFader } from "@/components/mixer/vertical-fader";
 import { PinLock } from "@/components/mixer/pin-lock";
 import { useMixerState } from "@/hooks/use-mixer-state";
 import { formatDb } from "@/lib/mixer-types";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,6 +38,8 @@ function MonitorConsole() {
     unlockedBusId,
     authenticate,
     lock,
+    compact,
+    setCompact,
     channels,
     patchChannel,
     soloActive,
@@ -84,15 +87,28 @@ function MonitorConsole() {
               <span className="hidden items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-level sm:flex">
                 <Activity className="h-3 w-3" /> 48 kHz · 32 bit
               </span>
-              <span className="flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              <span className="hidden items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:flex">
                 <Sliders className="h-3 w-3" /> {channels.length} ch
               </span>
               <button
                 type="button"
+                onClick={() => setCompact((v) => !v)}
+                aria-pressed={compact}
+                title={compact ? "Modo normal" : "Modo compacto"}
+                className="flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors hover:bg-surface-raised data-[active=true]:border-pan/60 data-[active=true]:text-pan sm:px-3 sm:py-1.5"
+                data-active={compact}
+              >
+                <Columns className="h-4 w-4 sm:h-3 sm:w-3" />
+                <span className="hidden sm:inline">compacto</span>
+              </button>
+              <button
+                type="button"
                 onClick={lock}
+                title="Bloquear console"
                 className="flex items-center gap-2 rounded-full border border-mute/40 bg-mute/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-mute transition-colors hover:bg-mute/20"
               >
-                <Lock className="h-3 w-3" /> bloquear
+                <Lock className="h-4 w-4 sm:h-3 sm:w-3" />
+                <span className="hidden sm:inline">bloquear</span>
               </button>
             </div>
           </header>
@@ -107,11 +123,19 @@ function MonitorConsole() {
                 channel={channel}
                 onChange={patchChannel}
                 soloActive={soloActive}
+                compact={compact}
               />
             ))}
 
             {/* Master */}
-            <article className="sticky right-0 flex w-[112px] shrink-0 flex-col items-center gap-2 rounded-2xl border border-master/30 bg-surface px-2 py-3 shadow-[-12px_0_24px_-12px_rgba(0,0,0,0.9)] sm:w-[124px] sm:gap-3 sm:px-3 sm:py-4 lg:w-[132px]">
+            <article
+              className={cn(
+                "sticky right-0 flex shrink-0 flex-col items-center gap-2 rounded-2xl border border-master/30 bg-surface px-2 py-3 shadow-[-12px_0_24px_-12px_rgba(0,0,0,0.9)]",
+                compact
+                  ? "w-[88px] gap-1.5 px-1.5 py-2 sm:w-[92px] sm:px-2 sm:py-2.5 lg:w-[96px]"
+                  : "w-[112px] gap-2 sm:w-[124px] sm:gap-3 sm:px-3 sm:py-4 lg:w-[132px]",
+              )}
+            >
               <header className="flex flex-col items-center gap-1">
                 <span className="rounded-full bg-master/15 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-master">
                   master
