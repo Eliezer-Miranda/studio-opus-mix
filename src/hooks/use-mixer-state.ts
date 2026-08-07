@@ -12,8 +12,15 @@ import type { ChannelPatch, MixerBus, MixerChannel } from "@/lib/mixer-types";
 export const BUSES: MixerBus[] = [
   { id: "bateria", name: "Bateria", icon: "drum", channelCount: 16 },
   { id: "baixo", name: "Baixo", icon: "guitar", channelCount: 16 },
-  { id: "teclado", name: "Teclado", icon: "piano", channelCount: 16 },
-  { id: "vozes", name: "Vozes", icon: "mic", channelCount: 16 },
+  { id: "guitarra", name: "Guitarra", icon: "guitar", channelCount: 16 },
+  { id: "violao", name: "Violão", icon: "guitar", channelCount: 16 },
+  { id: "teclado", name: "Teclado 1", icon: "piano", channelCount: 16 },
+  { id: "teclado2", name: "Teclado 2", icon: "piano", channelCount: 16 },
+  { id: "voz1", name: "Voz 1", icon: "mic", channelCount: 16 },
+  { id: "voz2", name: "Voz 2", icon: "mic", channelCount: 16 },
+  { id: "voz3", name: "Voz 3", icon: "mic", channelCount: 16 },
+  { id: "voz4", name: "Voz 4", icon: "mic", channelCount: 16 },
+  { id: "ministro", name: "Ministro", icon: "speech", channelCount: 16 },
   { id: "pastor", name: "Pastor", icon: "speech", channelCount: 16 },
   { id: "playback", name: "Playback", icon: "disc", channelCount: 16 },
 ];
