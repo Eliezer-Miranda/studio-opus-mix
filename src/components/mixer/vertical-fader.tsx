@@ -88,7 +88,7 @@ export function VerticalFader({
         updateFromClientY(e.clientY);
       }}
       className={cn(
-        "relative h-44 w-10 shrink-0 cursor-ns-resize touch-none select-none rounded-full outline-none sm:h-52",
+        "relative h-36 w-10 shrink-0 cursor-ns-resize touch-none select-none rounded-full outline-none sm:h-44 lg:h-52",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         disabled && "cursor-not-allowed opacity-40",
       )}
