@@ -105,34 +105,40 @@ export function ChannelStrip({ channel, onChange, soloActive, compact }: Channel
         <span className="ml-0.5 font-mono text-[9px] text-muted-foreground">dB</span>
       </div>
 
-      <div className="grid w-full grid-cols-2 gap-2">
+      <div className={cn("grid w-full gap-2", compact ? "grid-cols-1" : "grid-cols-2")}>
         <button
           type="button"
           aria-pressed={channel.mute}
           onClick={() => onChange(channel.id, { mute: !channel.mute })}
           className={cn(
-            "flex items-center justify-center gap-1 rounded-lg border py-1.5 font-mono text-[10px] uppercase tracking-widest transition-colors",
+            "flex items-center justify-center gap-1.5 rounded-lg border font-mono uppercase tracking-widest transition-colors active:scale-95",
+            compact
+              ? "min-h-[44px] text-[11px] sm:min-h-[48px] sm:text-xs"
+              : "py-1.5 text-[10px]",
             channel.mute
               ? "border-mute/60 bg-mute/20 text-mute"
               : "border-border bg-surface/60 text-muted-foreground hover:bg-surface-raised",
           )}
         >
           <Led on={channel.mute} color="var(--mute)" />
-          <VolumeX className="h-3 w-3" />
+          <VolumeX className={compact ? "h-4 w-4" : "h-3 w-3"} />
         </button>
         <button
           type="button"
           aria-pressed={channel.solo}
           onClick={() => onChange(channel.id, { solo: !channel.solo })}
           className={cn(
-            "flex items-center justify-center gap-1 rounded-lg border py-1.5 font-mono text-[10px] uppercase tracking-widest transition-colors",
+            "flex items-center justify-center gap-1.5 rounded-lg border font-mono uppercase tracking-widest transition-colors active:scale-95",
+            compact
+              ? "min-h-[44px] text-[11px] sm:min-h-[48px] sm:text-xs"
+              : "py-1.5 text-[10px]",
             channel.solo
               ? "border-solo/60 bg-solo/20 text-solo"
               : "border-border bg-surface/60 text-muted-foreground hover:bg-surface-raised",
           )}
         >
           <Led on={channel.solo} color="var(--solo)" />
-          <Headphones className="h-3 w-3" />
+          <Headphones className={compact ? "h-4 w-4" : "h-3 w-3"} />
         </button>
       </div>
     </article>
