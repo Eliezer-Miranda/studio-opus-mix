@@ -10,26 +10,32 @@ import type { ChannelPatch, MixerBus, MixerChannel } from "@/lib/mixer-types";
  */
 
 export const BUSES: MixerBus[] = [
-  { id: "bateria", name: "Bateria", icon: "drum", channelCount: 6 },
-  { id: "baixo", name: "Baixo", icon: "guitar", channelCount: 6 },
-  { id: "teclado", name: "Teclado", icon: "piano", channelCount: 6 },
-  { id: "vozes", name: "Vozes", icon: "mic", channelCount: 6 },
-  { id: "pastor", name: "Pastor", icon: "speech", channelCount: 6 },
-  { id: "playback", name: "Playback", icon: "disc", channelCount: 6 },
+  { id: "bateria", name: "Bateria", icon: "drum", channelCount: 16 },
+  { id: "baixo", name: "Baixo", icon: "guitar", channelCount: 16 },
+  { id: "teclado", name: "Teclado", icon: "piano", channelCount: 16 },
+  { id: "vozes", name: "Vozes", icon: "mic", channelCount: 16 },
+  { id: "pastor", name: "Pastor", icon: "speech", channelCount: 16 },
+  { id: "playback", name: "Playback", icon: "disc", channelCount: 16 },
 ];
 
 const BASE_CHANNELS: MixerChannel[] = [
-  { id: "kick", name: "Kick", kind: "live", volume: 78, pan: 0, mute: false, solo: false, level: 62 },
-  { id: "snare", name: "Snare", kind: "live", volume: 72, pan: -8, mute: false, solo: false, level: 54 },
-  { id: "bass", name: "Baixo", kind: "live", volume: 68, pan: 0, mute: false, solo: false, level: 48 },
-  { id: "gtr", name: "Guitarra", kind: "live", volume: 61, pan: 24, mute: false, solo: false, level: 41 },
-  { id: "keys", name: "Teclado", kind: "live", volume: 66, pan: -20, mute: false, solo: false, level: 45 },
-  { id: "voxlead", name: "Voz Lead", kind: "live", volume: 84, pan: 0, mute: false, solo: false, level: 71 },
-  { id: "voxbk", name: "Backing Vox", kind: "live", volume: 57, pan: 14, mute: true, solo: false, level: 33 },
+  { id: "vs", name: "VS", kind: "backing", volume: 55, pan: 0, mute: false, solo: false, level: 32 },
+  { id: "click", name: "Click", kind: "backing", volume: 52, pan: 0, mute: false, solo: false, level: 30 },
+  { id: "guias", name: "Guias", kind: "backing", volume: 48, pan: 0, mute: false, solo: false, level: 27 },
+  { id: "bateria", name: "Bateria", kind: "live", volume: 78, pan: 0, mute: false, solo: false, level: 62 },
+  { id: "baixo", name: "Baixo", kind: "live", volume: 68, pan: 0, mute: false, solo: false, level: 48 },
+  { id: "guitarra", name: "Guitarra", kind: "live", volume: 61, pan: 24, mute: false, solo: false, level: 41 },
+  { id: "violao", name: "Violão", kind: "live", volume: 59, pan: -24, mute: false, solo: false, level: 38 },
+  { id: "teclado1", name: "Teclado 1", kind: "live", volume: 66, pan: -20, mute: false, solo: false, level: 45 },
+  { id: "teclado2", name: "Teclado 2", kind: "live", volume: 63, pan: 20, mute: false, solo: false, level: 42 },
+  { id: "voz1", name: "Voz 1", kind: "live", volume: 84, pan: 0, mute: false, solo: false, level: 71 },
+  { id: "voz2", name: "Voz 2", kind: "live", volume: 74, pan: -10, mute: false, solo: false, level: 55 },
+  { id: "voz3", name: "Voz 3", kind: "live", volume: 72, pan: 10, mute: false, solo: false, level: 52 },
+  { id: "voz4", name: "Voz 4", kind: "live", volume: 70, pan: 14, mute: false, solo: false, level: 49 },
+  { id: "ministro", name: "Ministro", kind: "live", volume: 82, pan: 0, mute: false, solo: false, level: 64 },
   { id: "pastor", name: "Pastor", kind: "live", volume: 80, pan: 0, mute: false, solo: false, level: 58 },
-  { id: "trkclick", name: "Click", kind: "backing", volume: 52, pan: 0, mute: false, solo: false, level: 30 },
-  { id: "trkpads", name: "Pads Trk", kind: "backing", volume: 47, pan: 0, mute: false, solo: false, level: 26 },
 ];
+
 
 /**
  * Mock PINs. In production the PIN is NEVER validated in the browser:

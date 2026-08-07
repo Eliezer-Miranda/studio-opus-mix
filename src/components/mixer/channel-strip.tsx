@@ -22,7 +22,7 @@ function Led({ on, color }: { on: boolean; color: string }) {
 
 function Meter({ level, dimmed }: { level: number; dimmed: boolean }) {
   return (
-    <div className="flex h-44 w-1.5 flex-col-reverse gap-[2px] overflow-hidden rounded-full bg-background/80 p-[1px] sm:h-52">
+    <div className="flex h-36 w-1.5 flex-col-reverse gap-[2px] overflow-hidden rounded-full bg-background/80 p-[1px] sm:h-44 lg:h-52">
       {Array.from({ length: 18 }).map((_, i) => {
         const on = !dimmed && level > (i / 18) * 100;
         const color =
