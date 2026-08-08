@@ -127,11 +127,17 @@ function MonitorConsole() {
             </div>
           </header>
 
+          <GroupMenu
+            activeGroupId={activeGroupId}
+            onSelect={setActiveGroupId}
+            counts={groupCounts}
+          />
+
           <section
             aria-label="Canais do mixer"
             className="flex flex-1 items-start gap-3 overflow-x-auto pb-2"
           >
-            {channels.map((channel) => (
+            {visibleChannels.map((channel) => (
               <ChannelStrip
                 key={channel.id}
                 channel={channel}
