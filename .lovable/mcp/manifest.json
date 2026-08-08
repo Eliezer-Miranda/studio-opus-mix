@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "midnight-mixer-pro",
+      "version": "0.1.0",
+      "title": "Midnight Mixer Pro"
+    },
+    "tools": [
+      {
+        "name": "list_buses",
+        "title": "List monitor buses",
+        "description": "List every monitor mix (bus) available on the console, such as Bateria, Voz 1 or Pastor.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "buses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": [
+            "buses"
+          ]
+        }
+      },
+      {
+        "name": "list_channels",
+        "title": "List mixer channels",
+        "description": "List the console channels in fader order, optionally filtered by group (tracks, ritmo, cordas, teclas, vozes, fala) or kind (live/backing).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "group": {
+              "description": "Group id to filter by.",
+              "type": "string"
+            },
+            "kind": {
+              "description": "Channel kind filter.",
+              "type": "string",
+              "enum": [
+                "live",
+                "backing"
+              ]
+            }
+          }
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "channels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "kind": {
+                    "type": "string"
+                  },
+                  "group": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "kind",
+                  "group"
+                ]
+              }
+            }
+          },
+          "required": [
+            "channels"
+          ]
+        }
+      },
+      {
+        "name": "convert_fader_value",
+        "title": "Convert fader value",
+        "description": "Convert a 0-100 fader position to its dB label, and optionally a -50..50 pan position to its L/C/R label.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "position": {
+              "type": "number",
+              "description": "Fader position from 0 to 100."
+            },
+            "pan": {
+              "description": "Pan position from -50 (L) to 50 (R).",
+              "type": "number"
+            }
+          },
+          "required": [
+            "position"
+          ]
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "db": {
+              "type": "number"
+            },
+            "dbLabel": {
+              "type": "string"
+            },
+            "panLabel": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "db",
+            "dbLabel"
+          ]
+        }
+      }
+    ]
+  }
+}
