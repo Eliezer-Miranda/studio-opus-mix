@@ -26,7 +26,33 @@
           "type": "object",
           "properties": {}
         },
-        "outputSchema": null
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "buses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": [
+            "buses"
+          ]
+        }
       },
       {
         "name": "list_channels",
@@ -55,7 +81,41 @@
             }
           }
         },
-        "outputSchema": null
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "channels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "kind": {
+                    "type": "string"
+                  },
+                  "group": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "kind",
+                  "group"
+                ]
+              }
+            }
+          },
+          "required": [
+            "channels"
+          ]
+        }
       },
       {
         "name": "convert_fader_value",
@@ -83,7 +143,25 @@
             "position"
           ]
         },
-        "outputSchema": null
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "db": {
+              "type": "number"
+            },
+            "dbLabel": {
+              "type": "string"
+            },
+            "panLabel": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "db",
+            "dbLabel"
+          ]
+        }
       }
     ]
   }

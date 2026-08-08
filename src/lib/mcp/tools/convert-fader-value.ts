@@ -11,6 +11,11 @@ export default defineTool({
     position: z.number().describe("Fader position from 0 to 100."),
     pan: z.number().optional().describe("Pan position from -50 (L) to 50 (R)."),
   },
+  outputSchema: {
+    db: z.number(),
+    dbLabel: z.string(),
+    panLabel: z.string().optional(),
+  },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ position, pan }) => {
     const result = {

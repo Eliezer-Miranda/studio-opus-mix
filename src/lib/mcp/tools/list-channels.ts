@@ -11,6 +11,11 @@ export default defineTool({
     group: z.string().optional().describe("Group id to filter by."),
     kind: z.enum(["live", "backing"]).optional().describe("Channel kind filter."),
   },
+  outputSchema: {
+    channels: z.array(
+      z.object({ id: z.string(), name: z.string(), kind: z.string(), group: z.string() }),
+    ),
+  },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ group, kind }) => {
     const channels = CATALOG_CHANNELS.filter(
