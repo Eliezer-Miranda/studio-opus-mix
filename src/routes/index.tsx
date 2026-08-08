@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { Activity, Columns, Lock, RotateCcw, Sliders } from "lucide-react";
 import { BusSidebar } from "@/components/mixer/bus-sidebar";
 import { ChannelStrip } from "@/components/mixer/channel-strip";
+import { GroupMenu } from "@/components/mixer/group-menu";
+import { CHANNEL_GROUPS, filterChannelsByGroup } from "@/lib/channel-groups";
 import { VerticalFader } from "@/components/mixer/vertical-fader";
 import { PinLock } from "@/components/mixer/pin-lock";
 import { useMixerState } from "@/hooks/use-mixer-state";
@@ -47,7 +50,18 @@ function MonitorConsole() {
     setMaster,
   } = useMixerState();
 
+  const [activeGroupId, setActiveGroupId] = useState("todos");
+
   const activeBus = buses.find((b) => b.id === activeBusId)!;
+  const visibleChannels = filterChannelsByGroup(channels, activeGroupId);
+  const groupCounts = Object.fromEntries(
+    CHANNEL_GROUPS.map((g) => [
+      g.id,
+      g.channelIds.length === 0
+        ? channels.length
+        : channels.filter((c) => g.channelIds.includes(c.id)).length,
+    ]),
+  );
 
   if (unlockedBusId !== activeBusId) {
     return (
@@ -113,11 +127,17 @@ function MonitorConsole() {
             </div>
           </header>
 
+          <GroupMenu
+            activeGroupId={activeGroupId}
+            onSelect={setActiveGroupId}
+            counts={groupCounts}
+          />
+
           <section
             aria-label="Canais do mixer"
             className="flex flex-1 items-start gap-3 overflow-x-auto pb-2"
           >
-            {channels.map((channel) => (
+            {visibleChannels.map((channel) => (
               <ChannelStrip
                 key={channel.id}
                 channel={channel}
