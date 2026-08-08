@@ -50,7 +50,18 @@ function MonitorConsole() {
     setMaster,
   } = useMixerState();
 
+  const [activeGroupId, setActiveGroupId] = useState("todos");
+
   const activeBus = buses.find((b) => b.id === activeBusId)!;
+  const visibleChannels = filterChannelsByGroup(channels, activeGroupId);
+  const groupCounts = Object.fromEntries(
+    CHANNEL_GROUPS.map((g) => [
+      g.id,
+      g.channelIds.length === 0
+        ? channels.length
+        : channels.filter((c) => g.channelIds.includes(c.id)).length,
+    ]),
+  );
 
   if (unlockedBusId !== activeBusId) {
     return (
