@@ -138,6 +138,16 @@ function MonitorConsole() {
             counts={groupCounts}
           />
 
+          <StatusPanel
+            online={oscOnline}
+            lastMeterAt={lastMeterAt}
+            meterHz={meterHz}
+            updatingChannelIds={updatingChannelIds}
+            channels={channels}
+            activeBus={activeBus}
+          />
+
+
           <section
             aria-label="Canais do mixer"
             className="flex flex-1 items-start gap-3 overflow-x-auto pb-2"
