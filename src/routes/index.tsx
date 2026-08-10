@@ -4,6 +4,8 @@ import { Activity, Columns, Lock, RotateCcw, Sliders } from "lucide-react";
 import { BusSidebar } from "@/components/mixer/bus-sidebar";
 import { ChannelStrip } from "@/components/mixer/channel-strip";
 import { GroupMenu } from "@/components/mixer/group-menu";
+import { StatusPanel } from "@/components/mixer/status-panel";
+
 import { CHANNEL_GROUPS, filterChannelsByGroup } from "@/lib/channel-groups";
 import { VerticalFader } from "@/components/mixer/vertical-fader";
 import { PinLock } from "@/components/mixer/pin-lock";
