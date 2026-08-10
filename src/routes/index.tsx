@@ -48,7 +48,12 @@ function MonitorConsole() {
     soloActive,
     master,
     setMaster,
+    oscOnline,
+    lastMeterAt,
+    meterHz,
+    updatingChannelIds,
   } = useMixerState();
+
 
   const [activeGroupId, setActiveGroupId] = useState("todos");
 
