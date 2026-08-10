@@ -72,6 +72,13 @@ export function useMixerState() {
   const [master, setMaster] = useState(82);
   const [channels, setChannels] = useState<MixerChannel[]>(BASE_CHANNELS);
 
+  // Telemetria da ponte OSC. Com socket real: `oscOnline` vem de
+  // connect/disconnect e os demais do evento "meters".
+  const [oscOnline, setOscOnline] = useState(true);
+  const [lastMeterAt, setLastMeterAt] = useState<number | null>(null);
+  const [meterHz, setMeterHz] = useState(0);
+  const [updatingChannelIds, setUpdatingChannelIds] = useState<string[]>([]);
+
   /** Replace with the socket round-trip; keep the boolean contract. */
   const authenticate = useCallback(
     (busId: string, pin: string): boolean => {
@@ -98,17 +105,24 @@ export function useMixerState() {
 
   // Simulated input meters — replace with socket meter frames.
   useEffect(() => {
+    const period = 320;
     const timer = window.setInterval(() => {
+      const changed: string[] = [];
       setChannels((prev) =>
-        prev.map((c) => ({
-          ...c,
-          level: Math.max(
+        prev.map((c) => {
+          const next = Math.max(
             8,
             Math.min(100, c.level + (Math.random() * 34 - 17)),
-          ),
-        })),
+          );
+          if (Math.round(next) !== Math.round(c.level)) changed.push(c.id);
+          return { ...c, level: next };
+        }),
       );
-    }, 320);
+      setUpdatingChannelIds(changed);
+      setLastMeterAt(Date.now());
+      setMeterHz(1000 / period);
+      setOscOnline(true);
+    }, period);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -128,5 +142,10 @@ export function useMixerState() {
     soloActive,
     master,
     setMaster,
+    oscOnline,
+    lastMeterAt,
+    meterHz,
+    updatingChannelIds,
   };
 }
+
